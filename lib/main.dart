@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import 'anim/counter.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -37,10 +39,24 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(title: Text("Animations")),
-          body: Center(
-              child: Text("Animation",
-                  style: TextStyle(fontSize: 19 * animation.value)))),
-    );
+          body: Center(child: CounterAnimator())
+    ));
+  }
+}
+
+class Demo1 extends StatelessWidget {
+  const Demo1({
+    Key key,
+    @required this.animation,
+  }) : super(key: key);
+
+  final Animation<double> animation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Text("Animation",
+            style: TextStyle(fontSize: 19 * animation.value)));
   }
 }
 
@@ -69,48 +85,59 @@ class test extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.email), title: Text("password")),
       ], onTap: (int index) {}),
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(alignment: Alignment.topCenter, children: <Widget>[
-              Container(
-                width: 300,
-                height: 200,
-                // margin: EdgeInsets.all(50),
-                decoration: BoxDecoration(
-                    color: Colors.pinkAccent,
-                    borderRadius: BorderRadius.circular(4.5)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage:
-                          NetworkImage("https://picsum.photos/536/354"),
-                    ),
-                    Text('lorem'),
-                    Text('ipsum'),
-                  ],
-                ),
-              )
-            ]),
-            InkWell(
-                child: Text("lorem", style: TextStyle(fontSize: 43)),
-                onTap: () {}),
-            Scaff(),
-            Center(
-              child: Text("Test",
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500)),
-            ),
-          ],
-        ),
+      body: CounterAnimator(),
+    );
+  }
+}
+
+class Demo extends StatelessWidget {
+  const Demo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(alignment: Alignment.topCenter, children: <Widget>[
+            Container(
+              width: 300,
+              height: 200,
+              // margin: EdgeInsets.all(50),
+              decoration: BoxDecoration(
+                  color: Colors.pinkAccent,
+                  borderRadius: BorderRadius.circular(4.5)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        NetworkImage("https://picsum.photos/536/354"),
+                  ),
+                  Text('lorem'),
+                  Text('ipsum'),
+                ],
+              ),
+            )
+          ]),
+          InkWell(
+              child: Text("lorem", style: TextStyle(fontSize: 43)),
+              onTap: () {}),
+          Scaff(),
+          Center(
+            child: Text("Test",
+                textDirection: TextDirection.rtl,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w500)),
+          ),
+        ],
       ),
     );
   }
